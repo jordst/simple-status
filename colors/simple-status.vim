@@ -12,7 +12,7 @@ let g:currentmode={
 	  \ 't'  : 'f',
 	  \}
 
-if !exists("g:normal_color")
+if exists("g:normal_color") == 0
 	let normal_color = "White"
 	let normal_ctermbg = "231" " White
 	let statuslineNC_color = "gray20"
