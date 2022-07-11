@@ -1,3 +1,5 @@
+let g:simple_status_loaded = 1
+
 let g:currentmode={
 	  \ 'n'  : 'n',
 	  \ 'v'  : 'v',
@@ -10,7 +12,7 @@ let g:currentmode={
 	  \ 't'  : 'f',
 	  \}
 
-if &background == "dark"
+if !exists("g:normal_color")
 	let normal_color = "White"
 	let normal_ctermbg = "231" " White
 	let statuslineNC_color = "gray20"
@@ -18,27 +20,7 @@ if &background == "dark"
 	let statusline_background = "Black"
 	let statusline_ctermbg = "16" " black
 	let statusline_ctermfg = "177" " violet
-	let statuslineNC_ctermfg = "232" " gray3
-	let statuslineNC_ctermbg = "231" " White
-elseif g:colors_name == "fms-light"
-	let normal_color = "#b4eeb4"
-	let normal_ctermbg = "157" " DarkSeaGreen2
-	let statuslineNC_color = "#f0fff0"
-	let statusline_color = "Green"
-	let statusline_background = "Black"
-	let statusline_ctermbg = "16" " black
-	let statusline_ctermfg = "46" " green1
-	let statuslineNC_ctermfg = "194" " honeydew2
-	let statuslineNC_ctermbg = "16" " black
-elseif g:colors_name == "fms-sepia"
-	let normal_color = "#eeee9e"
-	let normal_ctermbg = "226" " yellow1
-	let statuslineNC_color = "#ffffea"
-	let statusline_color = "Orange"
-	let statusline_background = "Black"
-	let statusline_ctermbg = "16" " black
-	let statusline_ctermfg = "214" " orange1
-	let statuslineNC_ctermfg = "230" " cornsilk
+	let statuslineNC_ctermfg = "231" " white
 	let statuslineNC_ctermbg = "16" " black
 endif
 
@@ -52,16 +34,16 @@ set statusline+=%#VisualColor#%{(g:currentmode[mode()]=='vl')?'\ \ V-LINE\ ':''}
 set statusline+=%#VisualColor#%{(g:currentmode[mode()]=='vb')?'\ \ V-BLOCK\ ':''}
 set statusline+=%#CommandColor#%{(g:currentmode[mode()]=='c')?'\ \ COMMAND\ ':''}
 set statusline+=%#JobColor#%{(g:currentmode[mode()]=='f')?'\ \ Term-Job\ ':''}
-set statusline+=%1*\ %<%t\ 									"filename
-set statusline+=%7*\[%n]\ 									"buffnr
-set statusline+=%2*\ %=%y									"FileType
-set statusline+=%4*\ %{&ff}\ \|                             "FileFormat (dos/unix..) 
-set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).'\ \|'}    "Encoding
-set statusline+=%9*\ %3l\:%3c\ \|							"LineNr:ColNr
-set statusline+=%0*\ \ %m%r%w\ %P\ \ 				 		"Mod/RO/TOP?
-"set statusline+=%8*\ (%3p%%)\ \|                           "Totat Percent
-"set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\				"Encoding2
-"set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\	"Spellanguage & Highlight on?
+set statusline+=%1*\ %<%t\ 											" filename
+set statusline+=%7*\[%n]\ 												" buffnr
+set statusline+=%2*\ %=%y												" FileType
+set statusline+=%4*\ %{&ff}\ \|                             " FileFormat (dos/unix..) 
+set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).'\ \|'}    " Encoding
+set statusline+=%9*\ %3l\:%3c\ \|									" LineNr:ColNr
+set statusline+=%0*\ \ %m%r%w\ %P\ \ 								" Mod/RO/TOP?
+"set statusline+=%8*\ (%3p%%)\ \|                           " Totat Percent
+"set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\					" Encoding2
+"set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\	" Spellanguage & Highlight on?
 
 exe 'hi NormalColor guibg='.normal_color.' guifg=Black gui=BOLD ctermbg='.normal_ctermbg.' ctermfg=16 cterm=BOLD'
 hi VisualColor guibg=Orange guifg=Black gui=BOLD ctermbg=214 ctermfg=16 cterm=BOLD
